@@ -18,7 +18,7 @@
 <div class="bg"></div>
 <div class="bg bg2"></div>
 <div class="bg bg3"></div>
-<div th:insert="navbar/Navbar :: navbar">  </div>
+<!--<div th:insert="navbar/Navbar :: navbar">  </div>-->
 <div class="table-container fadeIn">
 
     <div class="card bg-transparent rounded-0 border-0 fadeIn text-white">
@@ -32,15 +32,15 @@
         </div>
         <div class="card-footer border-0 mt-5">
             <div class="row d-flex justify-content-center">
-                <div class="col-12 addPostBtn p-0">
+                <form th:action="@{/}" class="col-12 addPostBtn p-0">
                     <button type="submit" value="" class="box-shadow">
-                            <span class="row">
-                                <span class="col align-self-start d-flex justify-content-start">
-                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                                </span>
-                                <span class="col align-self-center">POWRÓT</span>
-                                <span class="col align-self-end text-end"></span>
+                        <span class="row">
+                            <span class="col align-self-start d-flex justify-content-start">
+                                <i class="fa fa-arrow-left" aria-hidden="true"></i>
                             </span>
+                            <span class="col align-self-center">POWRÓT</span>
+                            <span class="col align-self-end text-end"></span>
+                        </span>
                     </button>
                 </div>
             </div>
@@ -48,7 +48,7 @@
     </div>
 </div>
 
-<div th:insert="footer/Footer :: footer">  </div>
+<!--<div th:insert="footer/Footer :: footer">  </div>-->
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

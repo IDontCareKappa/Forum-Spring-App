@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -14,7 +14,7 @@
 
         <div th:fragment="navbar">
             <nav class="navbar navbar-expand-lg navbar-dark bg-main px-2">
-                <a class="navbar-brand slideLeft" href="">Forum</a>
+                <a class="navbar-brand slideLeft" href="#">Forum</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -22,22 +22,22 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item slideLeft">
-                            <a class="nav-link" href="">Posty <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="#">Posty <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item slideLeft">
-                            <a class="nav-link" href="">Kontakt</a>
+                            <a class="nav-link" href="#">Kontakt</a>
                         </li>
 
                         <li class="nav-item slideLeft">
-                            <a class="nav-link" href="">Login</a>
+                            <a class="nav-link" href="/login">Login</a>
                         </li>
 
                         <li class="nav-item  slideLeft">
-                            <a class="nav-link" href="">Register</a>
+                            <a class="nav-link" href="#">Register</a>
                         </li>
-                        <div class="nav-item dropdown slideLeft" style="z-index: 1;">
-                            <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                User
+                        <div sec:authorize="isAuthenticated()" class="nav-item dropdown slideLeft" style="z-index: 1;">
+                            <a sec:authentication="name" class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Logged User
                             </a>
                             <div class="dropdown-menu bg-main" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item text-white" href="">Edytuj profil</a>

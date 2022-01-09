@@ -53,6 +53,7 @@ public class PostService {
     }
     
     public void deletePost(Long postID){
+        System.out.println(postID);
         boolean exists = postRepo.existsById(postID);
         if(!exists){
             throw new PostNotFoundException(postID);
@@ -61,22 +62,22 @@ public class PostService {
     }
     
     @Transactional
-    public void updatePost(Long postID, String title, String content){
+    public void updatePost(Long postID, PostItem newPostItem){
         PostItem postItem = postRepo.findById(postID)
                 .orElseThrow(() -> { throw new PostNotFoundException(postID); });
         
-        if (title != null && title.length() > 0 
-                && !Objects.equals(postItem.getTitle(), title)) {
-            Optional<PostItem> postByTitle = postRepo.findPostByTitle(title);
+        if (newPostItem.getTitle() != null && newPostItem.getTitle().length() > 0
+                && !Objects.equals(postItem.getTitle(), newPostItem.getTitle())) {
+            Optional<PostItem> postByTitle = postRepo.findPostByTitle(newPostItem.getTitle());
             if (postByTitle.isPresent())
                 throw new PostNotFoundException(postID);
             
-            postItem.setTitle(title);
+            postItem.setTitle(newPostItem.getTitle());
         }
         
-        if (content != null && content.length() > 0 
-                && !Objects.equals(postItem.getContent(), content)){
-            postItem.setContent(content);
+        if (newPostItem.getContent() != null && newPostItem.getContent().length() > 0
+                && !Objects.equals(postItem.getContent(), newPostItem.getContent())){
+            postItem.setContent(newPostItem.getContent());
         }
     }
     

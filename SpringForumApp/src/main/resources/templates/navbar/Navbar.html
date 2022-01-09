@@ -3,57 +3,46 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
     <link href="../static/css/app.css" rel="stylesheet" th:href="@{/css/app.css}"/>
-    <link href="../static/css/app.css" rel="stylesheet" th:href="@{/css/font-awesome.css}"/>
 </head>
 <body>
 
         <div th:fragment="navbar">
             <nav class="navbar navbar-expand-lg navbar-dark bg-main px-2">
-                <a class="navbar-brand slideLeft" href="#">Forum</a>
+                <a class="navbar-brand slideLeft ml-5" th:href="@{/}" href="#">Forum</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto">
+                <div class="collapse navbar-collapse row" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto col ">
                         <li class="nav-item slideLeft">
-                            <a class="nav-link" href="#">Posty <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" th:href="@{/}" href="#">Posty</a>
                         </li>
                         <li class="nav-item slideLeft">
-                            <a class="nav-link" href="#">Kontakt</a>
+                            <a class="nav-link" href="/contact">Kontakt</a>
                         </li>
 
-                        <li class="nav-item slideLeft">
+                        <li sec:authorize="isAnonymous()" class="nav-item slideLeft">
                             <a class="nav-link" href="/login">Login</a>
                         </li>
 
-                        <li class="nav-item  slideLeft">
+                        <li sec:authorize="isAnonymous()" class="nav-item  slideLeft">
                             <a class="nav-link" href="#">Register</a>
                         </li>
-                        <div sec:authorize="isAuthenticated()" class="nav-item dropdown slideLeft" style="z-index: 1;">
-                            <a sec:authentication="name" class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Logged User
-                            </a>
-                            <div class="dropdown-menu bg-main" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-white" href="">Edytuj profil</a>
+                    </ul>
+                    <div class="navbar-nav col d-flex justify-content-end">
+                        <div sec:authorize="isAuthenticated()" class="nav-item dropdown slideRight px-5">
+                            <a sec:authentication="name" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Logged User</a>
+                            <div class="dropdown-menu bg-main ">
+                                <a class="dropdown-item text-white dropdown-item-hover" href="#">Edytuj profil</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-white" href="">Wyloguj się</a>
+                                <a class="dropdown-item text-white dropdown-item-hover" href="/logout">Wyloguj się</a>
                             </div>
                         </div>
-                    </ul>
+                    </div>
                 </div>
             </nav>
         </div>
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-
 </body>
 </html>

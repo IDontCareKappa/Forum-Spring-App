@@ -23,6 +23,8 @@ public class WebController {
     @GetMapping("/")
     public String index(Model model){
         model.addAttribute("posts", postService.getPosts());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("username", authentication.getName());
         return "hello";
     }
 
@@ -36,8 +38,6 @@ public class WebController {
     public String addPostForm(Model model){
         PostItem post = new PostItem();
         model.addAttribute("postItem", post);
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("username", authentication.getName());
         return "addPostForm";
     }
 
@@ -45,6 +45,34 @@ public class WebController {
     public String save(Model model, @ModelAttribute PostItem postItem){
         postService.addNewPost(postItem);
         return "redirect:/";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "redirect:/login";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id){
+        postService.deletePost(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(Model model, @PathVariable Long id){
+        model.addAttribute("post", postService.getPost(id));
+        return "editPostForm";
+    }
+
+    @PutMapping("/edit/{id}")
+    public String update(@PathVariable Long id, @ModelAttribute PostItem postItem){
+        postService.updatePost(id, postItem);
+        return "redirect:/";
+    }
+
+    @GetMapping("/contact")
+    public String contact(){
+        return "contact";
     }
 
 }

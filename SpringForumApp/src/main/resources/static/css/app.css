@@ -17,6 +17,11 @@ body{
     background-color: #111010 !important;
     font-family: "Roboto";
 }
+
+.dropdown-item-hover:hover{
+    background-color: #333333;
+}
+
 .title{
     text-align: center;
     background-color: transparent
